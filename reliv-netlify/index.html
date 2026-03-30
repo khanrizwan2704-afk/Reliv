@@ -305,23 +305,18 @@
     </div>
 
     <div class="card">
-      <div style="margin-bottom:14px;">
-        <label class="field-label" for="inp-salary">Expected Monthly Salary <span class="opt-tag">(optional)</span></label>
-        <input class="form-input" id="inp-salary" type="text" placeholder="e.g. ₹80,000 / Open to equity">
-        <p class="salary-hint">💡 Early-stage startup. Equity &amp; non-cash comp available — be transparent!</p>
+      <label class="field-label">Expected Salary Range (Monthly) <span class="opt-tag">(optional)</span></label>
+      <div class="opt-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));">
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹20–40K</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹40–60K</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹60–80K</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹80–120K</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹120–200K</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹200K+</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">Open to discussion</button>
+        <button class="opt-btn" onclick="pickSingle(this,'salary')">Equity based</button>
       </div>
-      <div>
-        <label class="field-label" for="inp-availability">Notice Period / Availability</label>
-        <select class="form-select" id="inp-availability">
-          <option value="">— Select —</option>
-          <option>Immediately available</option>
-          <option>Within 2 weeks</option>
-          <option>1 month</option>
-          <option>2 months</option>
-          <option>3 months</option>
-          <option>Part-time / Freelance</option>
-        </select>
-      </div>
+      <p class="salary-hint">💡 Early-stage startup — equity &amp; non-cash comp available!</p>
     </div>
 
     <button class="btn-primary" onclick="nextStep(2)">Continue →</button>
@@ -330,49 +325,9 @@
 
   <!-- ═══ STEP 3 — Background ═══ -->
   <div class="step" id="step-3">
-    <div class="step-label">Step 3 · Your Background</div>
-    <h2 class="step-title">Tell us about your experience 💼</h2>
-    <p class="step-desc">Help us understand your journey so far.</p>
-
-    <div class="card">
-      <div class="input-row" style="margin-bottom:14px;">
-        <div>
-          <label class="field-label" for="inp-experience">Years of Experience</label>
-          <select class="form-select" id="inp-experience">
-            <option value="">— Select —</option>
-            <option>0 – 1 year (fresher)</option>
-            <option>1 – 3 years</option>
-            <option>3 – 5 years</option>
-            <option>5 – 10 years</option>
-            <option>10+ years</option>
-          </select>
-        </div>
-        <div>
-          <label class="field-label" for="inp-education">Highest Education</label>
-          <select class="form-select" id="inp-education">
-            <option value="">— Select —</option>
-            <option>High School</option><option>Diploma</option>
-            <option>Bachelor's Degree</option><option>Master's Degree</option>
-            <option>MBA</option><option>PhD</option>
-            <option>Self-taught / Bootcamp</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label class="field-label" for="inp-currentRole">Current / Last Role &amp; Company <span class="opt-tag">(optional)</span></label>
-        <input class="form-input" id="inp-currentRole" type="text" placeholder="e.g. Marketing Manager @ StartupXYZ">
-      </div>
-    </div>
-
-    <div class="card">
-      <label class="field-label">Work Mode Preference</label>
-      <div class="opt-grid" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));">
-        <button class="opt-btn" onclick="pickSingle(this,'workMode')">Remote</button>
-        <button class="opt-btn" onclick="pickSingle(this,'workMode')">On-site</button>
-        <button class="opt-btn" onclick="pickSingle(this,'workMode')">Hybrid</button>
-        <button class="opt-btn" onclick="pickSingle(this,'workMode')">Flexible</button>
-      </div>
-    </div>
+    <div class="step-label">Step 3 · Your Mission</div>
+    <h2 class="step-title">Why Reliv? Why now? 🎯</h2>
+    <p class="step-desc">Help us understand your passion and vision.</p>
 
     <div class="card">
       <div style="margin-bottom:14px;">
@@ -799,12 +754,7 @@ async function submitForm() {
   fd.append('linkedin',     g('inp-linkedin'));
   fd.append('portfolio',    g('inp-portfolio'));
   fd.append('position',     selPos);
-  fd.append('salary',       g('inp-salary'));
-  fd.append('availability', g('inp-availability'));
-  fd.append('experience',   g('inp-experience'));
-  fd.append('education',    g('inp-education'));
-  fd.append('currentRole',  g('inp-currentRole'));
-  fd.append('workMode',     singles['workMode'] || '');
+  fd.append('salary',       singles['salary'] || '');
   fd.append('whyReliv',     g('inp-whyReliv'));
   fd.append('strategy',     g('inp-strategy'));
   fd.append('messageToTeam',g('inp-messageToTeam'));

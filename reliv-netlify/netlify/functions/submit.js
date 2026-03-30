@@ -153,23 +153,19 @@ function buildEmail(d, hasCV, cvName) {
       ${row('LinkedIn',          safeLink(d.linkedin))}
       ${row('Portfolio',         safeLink(d.portfolio))}
 
-      ${section('🏢', 'Position & Availability')}
+      ${section('🏢', 'Position & Compensation')}
       ${row('Applied Position',  esc(d.position))}
-      ${row('Expected Salary',   esc(d.salary))}
-      ${row('Notice Period',     esc(d.availability))}
-      ${row('Time Commitment',   esc(d.timeCommit))}
-      ${row('Open to Equity?',   esc(d.equity))}
-      ${row('Work Mode',         esc(d.workMode))}
+      ${row('Salary Expectation', esc(d.salary))}
 
-      ${section('📋', 'Background')}
-      ${row('Experience',        esc(d.experience))}
-      ${row('Education',         esc(d.education))}
-      ${row('Current / Last Role', esc(d.currentRole))}
+      ${section('📋', 'Mission & Vision')}
       ${row('Why Reliv?',        esc(d.whyReliv))}
       ${row('Strategy / Vision', esc(d.strategy))}
+      ${section('💬', 'Additional Info')}
       ${row('Message to CEO',    esc(d.messageToTeam))}
       ${row('Comments',          esc(d.comments))}
       ${row('Referred By',       esc(d.referral))}
+      ${row('Time Commitment',   esc(d.timeCommit))}
+      ${row('Open to Equity?',   esc(d.equity))}
 
       ${d.domainCategory ? section('🔧', 'Domains — ' + d.domainCategory) : ''}
       ${row('Marketing Brands',    esc(d.marketingBrands))}
