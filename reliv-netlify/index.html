@@ -270,8 +270,8 @@
     <div class="card">
       <div class="q-label"><span class="q-num">1</span>C-Suite &amp; Leadership Roles</div>
       <div class="opt-grid" id="pos-grid">
-        <button class="opt-btn reserved" data-pos="CEO"                onclick="selectPos(this)">CEO <span class="rbadge">RESERVED</span></button>
-        <button class="opt-btn reserved" data-pos="CFO"                onclick="selectPos(this)">CFO <span class="rbadge">RESERVED</span></button>
+        <button class="opt-btn"          data-pos="CEO"                onclick="selectPos(this)">CEO</button>
+        <button class="opt-btn"          data-pos="CFO"                onclick="selectPos(this)">CFO</button>
         <button class="opt-btn"          data-pos="CTO"                onclick="selectPos(this)">CTO</button>
         <button class="opt-btn"          data-pos="CMO"                onclick="selectPos(this)">CMO</button>
         <button class="opt-btn"          data-pos="COO"                onclick="selectPos(this)">COO</button>
@@ -611,9 +611,7 @@ function validate(step) {
   }
   if (step === 2) {
     if (!selPos) { toast('Please select a position before continuing.', true); return false; }
-    const p = selPos.toUpperCase();
-    if (p === 'CEO' || p === 'CFO') { toast('That position is reserved. Please choose another role.', true); return false; }
-    if (p === 'CTO') {
+    if (selPos === 'CTO') {
       const first = document.getElementById('inp-name').value.trim().split(/\s+/)[0].toLowerCase();
       if (first !== 'jiya') { toast('The CTO position is exclusively for applicants named Jiya.', true); return false; }
     }

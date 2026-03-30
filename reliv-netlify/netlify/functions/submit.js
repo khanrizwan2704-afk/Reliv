@@ -12,7 +12,6 @@ const ALLOWED_MIME   = new Set([
   'application/msword',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 ]);
-const RESERVED_POS   = new Set(['CEO', 'CFO']);
 const JIYA_ONLY_POS  = new Set(['CTO']);
 const EMAIL_RE       = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -244,16 +243,6 @@ exports.handler = async function (event) {
 
   // ── Position rules ────────────────────────────────────────────────────────
   const pos = (d.position || '').trim().toUpperCase();
-
-  if (RESERVED_POS.has(pos)) {
-    return {
-      statusCode: 403,
-      body: JSON.stringify({
-        ok: false, reserved: true,
-        error: `The ${pos} position is reserved and not open for external applications.`,
-      }),
-    };
-  }
 
   if (JIYA_ONLY_POS.has(pos) && !isJiya(d.name)) {
     return {
