@@ -54,8 +54,8 @@ reliv-recruit/
 
    | Key          | Value                              |
    |--------------|------------------------------------|
-   | `GMAIL_USER` | `relivcustomercare.in@gmail.com`   |
-   | `GMAIL_PASS` | `ibmjqnlxghicfke` *(no spaces)*   |
+   | `GMAIL_USER` | `your-email@gmail.com`             |
+   | `GMAIL_PASS` | `your-app-password` *(no spaces)*  |
 
 3. Click **"Save"**
 4. Go to **Deploys** tab → click **"Trigger deploy"** → **"Deploy site"**
@@ -105,6 +105,6 @@ netlify dev
 
 Create a `.env` file for local testing:
 ```
-GMAIL_USER=relivcustomercare.in@gmail.com
-GMAIL_PASS=ibmjqnlxghicfke
+GMAIL_USER=your-email@gmail.com
+GMAIL_PASS=your-app-password
 ```
