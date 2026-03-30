@@ -1,0 +1,10 @@
+{
+  "name": "reliv-recruit-netlify",
+  "version": "1.0.0",
+  "description": "Reliv Recruitment Form — Netlify deployment",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "nodemailer": "^6.9.9",
+    "busboy": "^1.6.0"
+  }
+}

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Join the Reliv team — apply for a role at Reliv Healthcare.">
+<title>Reliv — Join the Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange:      #F26522;
+    --orange-lgt:  #FF8C47;
+    --orange-pale: #FFF4EE;
+    --dark:        #1E1E1E;
+    --gray:        #6B6B6B;
+    --border:      #E8E8E8;
+    --white:       #FFFFFF;
+    --bg:          #F6F6F6;
+    --red:         #E53E3E;
+    --radius:      16px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; overflow-x: hidden; }
+
+  /* ADMIN BANNER */
+  .admin-banner { background: var(--dark); color: #fff; text-align: center; padding: 9px 20px; font-size: 12px; letter-spacing: .04em; }
+  .admin-banner span { color: var(--orange-lgt); font-weight: 700; }
+
+  /* HERO */
+  .hero { background: var(--white); border-bottom: 1px solid var(--border); padding: 44px 24px; text-align: center; }
+  .reliv-wordmark { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 900; color: var(--orange); letter-spacing: -2px; line-height: 1; display: block; margin-bottom: 18px; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(20px,4.5vw,30px); font-weight: 700; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
+  .hero-title span { color: var(--orange); }
+  .hero-sub { font-size: 14px; color: var(--gray); line-height: 1.7; max-width: 500px; margin: 0 auto 20px; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .pill { background: var(--orange-pale); border: 1px solid rgba(242,101,34,.2); color: var(--orange); padding: 5px 14px; border-radius: 99px; font-size: 12.5px; font-weight: 500; }
+
+  /* PROGRESS */
+  .progress-outer { max-width: 720px; margin: 26px auto 0; padding: 0 20px; }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray); margin-bottom: 7px; }
+  .progress-track { background: var(--border); height: 5px; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg,var(--orange),var(--orange-lgt)); border-radius: 99px; transition: width .4s ease; }
+
+  /* FORM */
+  .form-wrap { max-width: 720px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* STEPS */
+  .step { display: none; }
+  .step.active { display: block; animation: fadeUp .35s ease both; }
+  .step-label { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 5px; }
+  .step-title { font-family: 'Playfair Display', serif; font-size: clamp(20px,3.5vw,26px); font-weight: 700; color: var(--dark); margin-bottom: 7px; line-height: 1.3; }
+  .step-desc { font-size: 13.5px; color: var(--gray); margin-bottom: 24px; line-height: 1.7; }
+
+  /* CARD */
+  .card { background: var(--white); border-radius: var(--radius); padding: 22px; margin-bottom: 14px; border: 1px solid var(--border); }
+
+  /* LABELS */
+  .field-label { font-size: 13px; font-weight: 600; color: var(--gray); display: block; margin-bottom: 6px; }
+  .opt-tag { font-size: 11px; font-weight: 400; color: #AAA; margin-left: 3px; }
+  .q-label { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 12px; display: flex; align-items: flex-start; gap: 9px; }
+  .q-num { background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+  /* INPUTS */
+  .form-input, .form-textarea, .form-select {
+    width: 100%; border: 1.5px solid var(--border); border-radius: 11px;
+    padding: 12px 15px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--dark); background: var(--white); outline: none;
+    transition: border-color .18s; resize: vertical;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--orange); }
+  .form-input.err, .form-textarea.err { border-color: var(--red); }
+  .form-textarea { min-height: 96px; }
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; cursor: pointer;
+  }
+  .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:480px){ .input-row { grid-template-columns: 1fr; } }
+  .field-err { font-size: 11.5px; color: var(--red); margin-top: 4px; display: none; }
+  .field-err.show { display: block; }
+
+  /* OPTION BUTTONS */
+  .opt-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(148px,1fr)); gap: 9px; }
+  .opt-btn {
+    border: 1.5px solid var(--border); background: var(--white); border-radius: 11px;
+    padding: 11px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px;
+    font-weight: 500; color: var(--dark); cursor: pointer; transition: all .15s;
+    text-align: left; line-height: 1.4;
+  }
+  .opt-btn:hover:not(.reserved) { border-color: var(--orange-lgt); background: var(--orange-pale); }
+  .opt-btn.selected { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); font-weight: 600; }
+  .opt-btn.reserved { border-color: #CCC; background: #F5F5F5; color: #AAA; cursor: not-allowed; }
+  .rbadge { display: inline-block; background: var(--red); color: #fff; font-size: 9px; font-weight: 700; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; }
+  .jbadge { display: inline-block; background: var(--orange); color: #fff; font-size: 9px; font-weight: 700; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; }
+
+  /* CHIPS */
+  .chips-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { padding: 7px 14px; border: 1.5px solid var(--border); border-radius: 99px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s; background: #fff; color: var(--dark); }
+  .chip:hover { border-color: var(--orange-lgt); background: var(--orange-pale); }
+  .chip.selected { border-color: var(--orange); background: var(--orange); color: #fff; }
+
+  /* YES/NO */
+  .yn-row { display: flex; gap: 9px; flex-wrap: wrap; }
+  .yn-btn { flex: 1; min-width: 90px; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s; background: #fff; color: var(--dark); text-align: center; }
+  .yn-btn:hover { border-color: var(--orange-lgt); background: var(--orange-pale); }
+  .yn-btn.selected { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); font-weight: 700; }
+
+  /* FILE DROP */
+  .file-drop { border: 2px dashed var(--border); border-radius: 13px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all .2s; background: #fff; }
+  .file-drop:hover, .file-drop.drag-over { border-color: var(--orange); background: var(--orange-pale); }
+  .file-drop-icon { font-size: 36px; display: block; margin-bottom: 10px; }
+  .file-drop-label { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .file-drop-sub { font-size: 12px; color: var(--gray); }
+  .file-tag { display: none; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--orange); }
+  #cv-input { display: none; }
+
+  /* NOTICES */
+  .notice { display: none; border-radius: 12px; padding: 14px 16px; margin-top: 12px; gap: 11px; align-items: flex-start; }
+  .notice.show { display: flex; animation: fadeUp .22s ease; }
+  .n-icon { font-size: 20px; flex-shrink: 0; }
+  .n-text { font-size: 13px; line-height: 1.65; }
+  .notice-red    { background: #FFF5F5; border: 1.5px solid #FEB2B2; }
+  .notice-red    .n-text { color: #C53030; }
+  .notice-yellow { background: #FFFBEB; border: 1.5px solid #F6E05E; }
+  .notice-yellow .n-text { color: #744210; }
+
+  /* DOMAIN SECTIONS */
+  .dom-section { display: none; margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 16px; }
+  .dom-section.show { display: block; animation: fadeUp .22s ease; }
+  .dom-title { font-size: 12px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 12px; }
+
+  /* BUTTONS */
+  .btn-primary {
+    width: 100%; padding: 15px; background: linear-gradient(135deg,var(--orange),var(--orange-lgt));
+    color: #fff; border: none; border-radius: 13px; font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 20px;
+    transition: transform .15s, box-shadow .15s; box-shadow: 0 4px 16px rgba(242,101,34,.3);
+  }
+  .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(242,101,34,.4); }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+  .btn-back { background: none; border: none; color: var(--gray); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; padding: 10px 0; display: block; text-align: center; width: 100%; margin-top: 8px; transition: color .15s; }
+  .btn-back:hover { color: var(--orange); }
+
+  /* TOAST */
+  .toast { display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1E1E1E; color: #fff; padding: 13px 22px; border-radius: 12px; font-size: 13.5px; font-weight: 500; box-shadow: 0 6px 24px rgba(0,0,0,.22); z-index: 9999; max-width: 90vw; text-align: center; white-space: pre-wrap; }
+  .toast.show { display: block; animation: toastIn .3s ease; }
+  .toast.is-error { background: var(--red); }
+  @keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+  /* SPINNER */
+  .spin { display: inline-block; width: 17px; height: 17px; border: 2.5px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* THANK YOU */
+  .ty-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 48px 28px; text-align: center; }
+  .ty-icon { font-size: 58px; display: block; margin-bottom: 16px; }
+  .ty-badge { display: inline-block; background: var(--orange-pale); border: 1px solid rgba(242,101,34,.2); color: var(--orange); font-size: 13px; font-weight: 600; padding: 6px 18px; border-radius: 99px; margin-bottom: 16px; }
+  .ty-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+  .ty-msg { font-size: 14px; color: var(--gray); line-height: 1.85; max-width: 440px; margin: 0 auto; }
+
+  /* FOOTER */
+  .footer { background: var(--white); border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; }
+  .ftag { font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: .06em; text-transform: uppercase; }
+  .fsep { font-size: 12px; color: var(--border); margin: 0 6px; }
+  .fcopy { font-size: 11.5px; color: #BBB; margin-top: 6px; display: block; }
+
+  /* MISC */
+  .salary-hint { font-size: 11.5px; color: #AAA; margin-top: 5px; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<!-- ADMIN BANNER -->
+<div class="admin-banner">🔒 This link is distributed by <span>Reliv Admin</span> only &nbsp;·&nbsp; Unauthorised sharing is discouraged</div>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="reliv-wordmark">Reliv</span>
+  <h1 class="hero-title">Join the <span>Reliv</span> Team 🚀</h1>
+  <p class="hero-sub">We're building something extraordinary in health-tech. If you believe in the mission — tell us about yourself.</p>
+  <div class="hero-pills">
+    <span class="pill">🌍 Startup Energy</span>
+    <span class="pill">💡 Innovation First</span>
+    <span class="pill">🤝 Impact Driven</span>
+    <span class="pill">📈 Growth Stage</span>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-outer" id="progress-outer">
+  <div class="progress-meta">
+    <span id="step-counter">Step 1 of 6</span>
+    <span id="pct-label">17% complete</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:17%"></div></div>
+</div>
+
+<!-- FORM WRAPPER -->
+<div class="form-wrap">
+
+  <!-- ═══ STEP 1 — About You ═══ -->
+  <div class="step active" id="step-1">
+    <div class="step-label">Step 1 · About You</div>
+    <h2 class="step-title">Let's start with the basics 👋</h2>
+    <p class="step-desc">Name and email are required. Everything else helps us know you better.</p>
+
+    <div class="card">
+      <div class="input-row" style="margin-bottom:14px;">
+        <div>
+          <label class="field-label" for="inp-name">Full Name <span style="color:var(--red)">*</span></label>
+          <input class="form-input" id="inp-name" type="text" placeholder="Priya Sharma" autocomplete="name">
+          <div class="field-err" id="err-name">Please enter your full name.</div>
+        </div>
+        <div>
+          <label class="field-label" for="inp-email">Email <span style="color:var(--red)">*</span></label>
+          <input class="form-input" id="inp-email" type="email" placeholder="you@example.com" autocomplete="email">
+          <div class="field-err" id="err-email">Please enter a valid email address.</div>
+        </div>
+      </div>
+      <div class="input-row" style="margin-bottom:14px;">
+        <div>
+          <label class="field-label" for="inp-phone">Phone <span class="opt-tag">(optional)</span></label>
+          <input class="form-input" id="inp-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel">
+        </div>
+        <div>
+          <label class="field-label" for="inp-city">City / Location <span class="opt-tag">(optional)</span></label>
+          <input class="form-input" id="inp-city" type="text" placeholder="Mumbai, India">
+        </div>
+      </div>
+      <div class="input-row">
+        <div>
+          <label class="field-label" for="inp-age">Age <span class="opt-tag">(optional)</span></label>
+          <input class="form-input" id="inp-age" type="number" placeholder="24" min="16" max="80">
+        </div>
+        <div>
+          <label class="field-label" for="inp-gender">Gender <span class="opt-tag">(optional)</span></label>
+          <select class="form-select" id="inp-gender">
+            <option value="">— Select —</option>
+            <option>Male</option><option>Female</option>
+            <option>Non-binary</option><option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <label class="field-label" for="inp-linkedin">LinkedIn Profile <span class="opt-tag">(optional)</span></label>
+        <input class="form-input" id="inp-linkedin" type="url" placeholder="https://linkedin.com/in/yourname">
+      </div>
+      <div>
+        <label class="field-label" for="inp-portfolio">Portfolio / Website <span class="opt-tag">(optional)</span></label>
+        <input class="form-input" id="inp-portfolio" type="url" placeholder="https://yoursite.com">
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="nextStep(1)">Continue →</button>
+  </div>
+
+  <!-- ═══ STEP 2 — Position ═══ -->
+  <div class="step" id="step-2">
+    <div class="step-label">Step 2 · Position</div>
+    <h2 class="step-title">Which role are you applying for?</h2>
+    <p class="step-desc">Select the position that fits your expertise. Some roles have special conditions.</p>
+
+    <div class="card">
+      <div class="q-label"><span class="q-num">1</span>C-Suite &amp; Leadership Roles</div>
+      <div class="opt-grid" id="pos-grid">
+        <button class="opt-btn reserved" data-pos="CEO"                onclick="selectPos(this)">CEO <span class="rbadge">RESERVED</span></button>
+        <button class="opt-btn reserved" data-pos="CFO"                onclick="selectPos(this)">CFO <span class="rbadge">RESERVED</span></button>
+        <button class="opt-btn"          data-pos="CTO"                onclick="selectPos(this)">CTO <span class="jbadge">JIYA ONLY</span></button>
+        <button class="opt-btn"          data-pos="CMO"                onclick="selectPos(this)">CMO</button>
+        <button class="opt-btn"          data-pos="COO"                onclick="selectPos(this)">COO</button>
+        <button class="opt-btn"          data-pos="CPO"                onclick="selectPos(this)">CPO</button>
+        <button class="opt-btn"          data-pos="CIO"                onclick="selectPos(this)">CIO</button>
+        <button class="opt-btn"          data-pos="CSO"                onclick="selectPos(this)">CSO — Strategy</button>
+        <button class="opt-btn"          data-pos="CHRO"               onclick="selectPos(this)">CHRO</button>
+        <button class="opt-btn"          data-pos="CCO"                onclick="selectPos(this)">CCO — Content</button>
+        <button class="opt-btn"          data-pos="CGO"                onclick="selectPos(this)">CGO — Growth</button>
+        <button class="opt-btn"          data-pos="CBO"                onclick="selectPos(this)">CBO — Brand</button>
+        <button class="opt-btn"          data-pos="VP Engineering"     onclick="selectPos(this)">VP Engineering</button>
+        <button class="opt-btn"          data-pos="VP Sales"           onclick="selectPos(this)">VP Sales</button>
+        <button class="opt-btn"          data-pos="Head of Marketing"  onclick="selectPos(this)">Head of Marketing</button>
+        <button class="opt-btn"          data-pos="Head of Design"     onclick="selectPos(this)">Head of Design</button>
+        <button class="opt-btn"          data-pos="Head of Operations" onclick="selectPos(this)">Head of Operations</button>
+        <button class="opt-btn"          data-pos="Other"              onclick="selectPos(this)">Other / Propose ✏️</button>
+      </div>
+
+      <div class="notice notice-red" id="n-reserved">
+        <span class="n-icon">🔒</span>
+        <div class="n-text"><strong>This position is reserved.</strong> CEO and CFO are not open for external applications right now. Please choose another role.</div>
+      </div>
+      <div class="notice notice-yellow" id="n-jiya">
+        <span class="n-icon">⭐</span>
+        <div class="n-text"><strong>CTO is exclusively for applicants named Jiya.</strong> If your first name is Jiya, you're very welcome to apply!</div>
+      </div>
+      <div id="other-pos-wrap" style="display:none;margin-top:14px;">
+        <label class="field-label" for="inp-other-pos">Describe the role you have in mind</label>
+        <input class="form-input" id="inp-other-pos" type="text" placeholder="e.g. Head of Healthcare Partnerships">
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <label class="field-label" for="inp-salary">Expected Monthly Salary <span class="opt-tag">(optional)</span></label>
+        <input class="form-input" id="inp-salary" type="text" placeholder="e.g. ₹80,000 / Open to equity">
+        <p class="salary-hint">💡 Early-stage startup. Equity &amp; non-cash comp available — be transparent!</p>
+      </div>
+      <div>
+        <label class="field-label" for="inp-availability">Notice Period / Availability</label>
+        <select class="form-select" id="inp-availability">
+          <option value="">— Select —</option>
+          <option>Immediately available</option>
+          <option>Within 2 weeks</option>
+          <option>1 month</option>
+          <option>2 months</option>
+          <option>3 months</option>
+          <option>Part-time / Freelance</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="nextStep(2)">Continue →</button>
+    <button class="btn-back"    onclick="prevStep(2)">← Back</button>
+  </div>
+
+  <!-- ═══ STEP 3 — Background ═══ -->
+  <div class="step" id="step-3">
+    <div class="step-label">Step 3 · Your Background</div>
+    <h2 class="step-title">Tell us about your experience 💼</h2>
+    <p class="step-desc">Help us understand your journey so far.</p>
+
+    <div class="card">
+      <div class="input-row" style="margin-bottom:14px;">
+        <div>
+          <label class="field-label" for="inp-experience">Years of Experience</label>
+          <select class="form-select" id="inp-experience">
+            <option value="">— Select —</option>
+            <option>0 – 1 year (fresher)</option>
+            <option>1 – 3 years</option>
+            <option>3 – 5 years</option>
+            <option>5 – 10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="inp-education">Highest Education</label>
+          <select class="form-select" id="inp-education">
+            <option value="">— Select —</option>
+            <option>High School</option><option>Diploma</option>
+            <option>Bachelor's Degree</option><option>Master's Degree</option>
+            <option>MBA</option><option>PhD</option>
+            <option>Self-taught / Bootcamp</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="inp-currentRole">Current / Last Role &amp; Company <span class="opt-tag">(optional)</span></label>
+        <input class="form-input" id="inp-currentRole" type="text" placeholder="e.g. Marketing Manager @ StartupXYZ">
+      </div>
+    </div>
+
+    <div class="card">
+      <label class="field-label">Work Mode Preference</label>
+      <div class="opt-grid" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr));">
+        <button class="opt-btn" onclick="pickSingle(this,'workMode')">Remote</button>
+        <button class="opt-btn" onclick="pickSingle(this,'workMode')">On-site</button>
+        <button class="opt-btn" onclick="pickSingle(this,'workMode')">Hybrid</button>
+        <button class="opt-btn" onclick="pickSingle(this,'workMode')">Flexible</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <label class="field-label" for="inp-whyReliv">Why do you want to join Reliv? <span style="color:var(--red)">*</span></label>
+        <textarea class="form-textarea" id="inp-whyReliv" placeholder="What excites you about Reliv? What do you bring to the table?"></textarea>
+        <div class="field-err" id="err-why">Please share why you want to join Reliv.</div>
+      </div>
+      <div>
+        <label class="field-label" for="inp-strategy">Strategy / Vision for Reliv <span class="opt-tag">(optional — but impressive)</span></label>
+        <textarea class="form-textarea" id="inp-strategy" placeholder="What would you do in your first 90 days?"></textarea>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="nextStep(3)">Continue →</button>
+    <button class="btn-back"    onclick="prevStep(3)">← Back</button>
+  </div>
+
+  <!-- ═══ STEP 4 — Domain Expertise ═══ -->
+  <div class="step" id="step-4">
+    <div class="step-label">Step 4 · Domain Expertise</div>
+    <h2 class="step-title">What's your superpower? ⚡</h2>
+    <p class="step-desc">Select all domains that apply. Tailored questions appear for each selection.</p>
+
+    <div class="card">
+      <div class="q-label"><span class="q-num">1</span>Select your domain(s)</div>
+      <div class="chips-wrap">
+        <button class="chip" onclick="toggleDom(this,'marketing')">📣 Marketing</button>
+        <button class="chip" onclick="toggleDom(this,'content')">🎬 Content Creator</button>
+        <button class="chip" onclick="toggleDom(this,'ml')">🤖 Machine Learning / AI</button>
+        <button class="chip" onclick="toggleDom(this,'uiux')">🎨 UI/UX Design</button>
+        <button class="chip" onclick="toggleDom(this,'webdev')">💻 Web Development</button>
+        <button class="chip" onclick="toggleDom(this,'electronics')">🔌 Electronics / Hardware</button>
+        <button class="chip" onclick="toggleDom(this,'finance')">💰 Finance / Accounting</button>
+        <button class="chip" onclick="toggleDom(this,'ops')">⚙️ Operations / HR</button>
+        <button class="chip" onclick="toggleDom(this,'sales')">🤝 Sales / BD</button>
+        <button class="chip" onclick="toggleDom(this,'data')">📊 Data Analytics</button>
+        <button class="chip" onclick="toggleDom(this,'healthcare')">🏥 Healthcare / Medical</button>
+        <button class="chip" onclick="toggleDom(this,'legal')">⚖️ Legal / Compliance</button>
+        <button class="chip" onclick="toggleDom(this,'other')">✨ Other</button>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-marketing">
+      <div class="card"><div class="dom-title">📣 Marketing</div>
+        <div style="margin-bottom:14px;"><label class="field-label" for="inp-marketingBrands">Brands / Clients you've worked with</label><input class="form-input" id="inp-marketingBrands" type="text" placeholder="Nike India, Startup XYZ, 3 D2C brands…"></div>
+        <div><label class="field-label" for="inp-campaigns">Notable campaigns or results</label><textarea class="form-textarea" id="inp-campaigns" placeholder="Describe a campaign and its impact…"></textarea></div>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-content">
+      <div class="card"><div class="dom-title">🎬 Content Creator</div>
+        <div style="margin-bottom:14px;"><label class="field-label" for="inp-instagram">Instagram Handle</label><input class="form-input" id="inp-instagram" type="text" placeholder="@yourhandle"></div>
+        <div style="margin-bottom:14px;"><label class="field-label" for="inp-otherSocial">Other Handles (YouTube, X, TikTok…)</label><input class="form-input" id="inp-otherSocial" type="text" placeholder="@yt/yourname, @x/you"></div>
+        <div style="margin-bottom:14px;"><label class="field-label">Can you do voiceover?</label><div class="yn-row"><button class="yn-btn" onclick="pickYN(this,'voiceover')">✅ Yes</button><button class="yn-btn" onclick="pickYN(this,'voiceover')">❌ No</button></div></div>
+        <div style="margin-bottom:14px;"><label class="field-label">Can you make Reels for Reliv?</label><div class="yn-row"><button class="yn-btn" onclick="pickYN(this,'reels')">✅ Yes</button><button class="yn-btn" onclick="pickYN(this,'reels')">❌ No</button></div></div>
+        <div style="margin-bottom:14px;"><label class="field-label">Can you add Reliv Stories to your account?</label><div class="yn-row"><button class="yn-btn" onclick="pickYN(this,'story')">✅ Yes</button><button class="yn-btn" onclick="pickYN(this,'story')">❌ No</button></div></div>
+        <div><label class="field-label">Can you manage Reliv's social media?</label><div class="yn-row"><button class="yn-btn" onclick="pickYN(this,'socialManage')">✅ Yes</button><button class="yn-btn" onclick="pickYN(this,'socialManage')">❌ No</button></div></div>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-ml">
+      <div class="card"><div class="dom-title">🤖 Machine Learning / AI</div>
+        <label class="field-label" for="inp-mlLink">Project link / GitHub repo</label>
+        <input class="form-input" id="inp-mlLink" type="url" placeholder="https://github.com/you/project">
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-uiux">
+      <div class="card"><div class="dom-title">🎨 UI/UX Design</div>
+        <label class="field-label" for="inp-uiuxLink">Demo link (Figma / Behance / Dribbble)</label>
+        <input class="form-input" id="inp-uiuxLink" type="url" placeholder="https://figma.com/file/…">
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-webdev">
+      <div class="card"><div class="dom-title">💻 Web Development</div>
+        <label class="field-label" for="inp-webdevLink">Live site / domain you built</label>
+        <input class="form-input" id="inp-webdevLink" type="url" placeholder="https://yourproject.com">
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-electronics">
+      <div class="card"><div class="dom-title">🔌 Electronics / Hardware</div>
+        <label class="field-label" for="inp-electronicsVideo">Project video link (YouTube / Drive)</label>
+        <input class="form-input" id="inp-electronicsVideo" type="url" placeholder="https://youtube.com/…">
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-finance">
+      <div class="card"><div class="dom-title">💰 Finance / Accounting</div>
+        <label class="field-label" for="inp-financeTools">Tools &amp; expertise</label>
+        <input class="form-input" id="inp-financeTools" type="text" placeholder="Excel, SAP, Financial Modelling, CA/CFA…">
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-ops">
+      <div class="card"><div class="dom-title">⚙️ Operations / HR</div>
+        <label class="field-label" for="inp-notes-ops">Relevant tools / achievements</label>
+        <textarea class="form-textarea" id="inp-notes-ops" placeholder="Process automation, hiring, HRMS, SOPs…"></textarea>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-sales">
+      <div class="card"><div class="dom-title">🤝 Sales / Business Development</div>
+        <label class="field-label" for="inp-notes-sales">Key metrics / achievements</label>
+        <textarea class="form-textarea" id="inp-notes-sales" placeholder="Revenue generated, partnerships closed, deal sizes…"></textarea>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-data">
+      <div class="card"><div class="dom-title">📊 Data Analytics</div>
+        <label class="field-label" for="inp-notes-data">Tools &amp; project links</label>
+        <input class="form-input" id="inp-notes-data" type="text" placeholder="Python, Tableau, Power BI, SQL — share a link">
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-healthcare">
+      <div class="card"><div class="dom-title">🏥 Healthcare / Medical</div>
+        <label class="field-label" for="inp-notes-healthcare">Background &amp; credentials</label>
+        <textarea class="form-textarea" id="inp-notes-healthcare" placeholder="MBBS, Nursing, Healthcare IT, Clinical Research…"></textarea>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-legal">
+      <div class="card"><div class="dom-title">⚖️ Legal / Compliance</div>
+        <label class="field-label" for="inp-notes-legal">Areas of expertise</label>
+        <textarea class="form-textarea" id="inp-notes-legal" placeholder="Startup law, IP, GDPR, compliance frameworks…"></textarea>
+      </div>
+    </div>
+
+    <div class="dom-section" id="dom-other">
+      <div class="card"><div class="dom-title">✨ Other Domain</div>
+        <label class="field-label" for="inp-notes-other">Describe your domain and expertise</label>
+        <textarea class="form-textarea" id="inp-notes-other" placeholder="Tell us what you're great at…"></textarea>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="nextStep(4)">Continue →</button>
+    <button class="btn-back"    onclick="prevStep(4)">← Back</button>
+  </div>
+
+  <!-- ═══ STEP 5 — CV & Commitment ═══ -->
+  <div class="step" id="step-5">
+    <div class="step-label">Step 5 · CV &amp; Commitment</div>
+    <h2 class="step-title">Almost there! 📎</h2>
+    <p class="step-desc">Attach your CV and tell us about your commitment to Reliv.</p>
+
+    <div class="card">
+      <div class="q-label"><span class="q-num">1</span>Upload your CV <span class="opt-tag">(PDF, DOC, DOCX · max 10 MB)</span></div>
+      <div class="file-drop" id="file-drop" role="button" tabindex="0" aria-label="Upload CV" onclick="document.getElementById('cv-input').click()">
+        <span class="file-drop-icon">📄</span>
+        <div class="file-drop-label">Click or drag &amp; drop your CV here</div>
+        <div class="file-drop-sub">PDF, DOC, DOCX accepted · Uploading greatly improves your chances</div>
+        <div class="file-tag" id="file-tag"></div>
+      </div>
+      <input type="file" id="cv-input" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="handleFile(this)">
+    </div>
+
+    <div class="card">
+      <div style="margin-bottom:18px;">
+        <label class="field-label">If selected, will you dedicate meaningful time to Reliv? <span class="opt-tag">(optional)</span></label>
+        <div class="yn-row">
+          <button class="yn-btn" onclick="pickYN(this,'timeCommit')">✅ Yes, fully committed</button>
+          <button class="yn-btn" onclick="pickYN(this,'timeCommit')">⏳ Partially (explain in notes)</button>
+          <button class="yn-btn" onclick="pickYN(this,'timeCommit')">❌ Need to discuss</button>
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Open to equity / non-cash compensation? <span class="opt-tag">(optional)</span></label>
+        <div class="yn-row">
+          <button class="yn-btn" onclick="pickYN(this,'equity')">✅ Yes</button>
+          <button class="yn-btn" onclick="pickYN(this,'equity')">🤔 Maybe, let's talk</button>
+          <button class="yn-btn" onclick="pickYN(this,'equity')">❌ Prefer fixed salary</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="nextStep(5)">Continue →</button>
+    <button class="btn-back"    onclick="prevStep(5)">← Back</button>
+  </div>
+
+  <!-- ═══ STEP 6 — Final Message ═══ -->
+  <div class="step" id="step-6">
+    <div class="step-label">Step 6 · Final Words</div>
+    <h2 class="step-title">Anything else to share? 💬</h2>
+    <p class="step-desc">Speak directly to the CEO, the team, or just leave us a note.</p>
+
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <label class="field-label" for="inp-messageToTeam">Message to the CEO / Co-founders <span class="opt-tag">(optional)</span></label>
+        <textarea class="form-textarea" id="inp-messageToTeam" placeholder="A personal note, pitch, or something you want leadership to know…"></textarea>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label class="field-label" for="inp-comments">Comments / Suggestions for Reliv <span class="opt-tag">(optional)</span></label>
+        <textarea class="form-textarea" id="inp-comments" placeholder="Feedback on the product, direction, industry, or anything else…"></textarea>
+      </div>
+      <div>
+        <label class="field-label" for="inp-referral">Referred by / How you found us <span class="opt-tag">(optional)</span></label>
+        <input class="form-input" id="inp-referral" type="text" placeholder="Name, LinkedIn post, Instagram, etc.">
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btn-submit" onclick="submitForm()">🚀 Submit Application</button>
+    <button class="btn-back" onclick="prevStep(6)">← Back</button>
+  </div>
+
+  <!-- ═══ THANK YOU ═══ -->
+  <div class="step" id="step-ty">
+    <div class="ty-card">
+      <span class="ty-icon">🎉</span>
+      <div class="ty-badge">Application Received</div>
+      <h2 class="ty-title">You're in the pipeline!</h2>
+      <p class="ty-msg">
+        Thank you for applying to join Reliv. Your application has been sent directly to our team.<br><br>
+        We review every submission personally. If there's a fit, you'll hear from us soon.<br><br>
+        <strong>Keep building, keep dreaming. 🚀</strong>
+      </p>
+    </div>
+  </div>
+
+</div><!-- /form-wrap -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="ftag">Reliv</span><span class="fsep">·</span>
+  <span class="ftag">Health Tech</span><span class="fsep">·</span>
+  <span class="ftag">Careers</span>
+  <span class="fcopy">© 2025 Reliv Healthcare. All rights reserved.</span>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<script>
+'use strict';
+
+/* ── State ── */
+const TOTAL   = 6;
+let curStep   = 1;
+let selPos    = '';
+let domains   = new Set();
+let yn        = {};
+let singles   = {};
+let cvFile    = null;
+let toastTmr  = null;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+/* ── Toast ── */
+function toast(msg, isErr = false) {
+  const el = document.getElementById('toast');
+  clearTimeout(toastTmr);
+  el.textContent = msg;
+  el.className = 'toast show' + (isErr ? ' is-error' : '');
+  toastTmr = setTimeout(() => { el.className = 'toast'; }, 4500);
+}
+
+/* ── Progress ── */
+function setProgress(n) {
+  const pct = Math.round((n / TOTAL) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('step-counter').textContent  = `Step ${n} of ${TOTAL}`;
+  document.getElementById('pct-label').textContent     = pct + '% complete';
+}
+
+/* ── Navigation ── */
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('step-' + n);
+  if (el) { el.classList.add('active'); curStep = n; setProgress(n); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep(from) { if (validate(from)) showStep(from + 1); }
+function prevStep(from) { showStep(from - 1); }
+
+/* ── Inline errors ── */
+function fieldErr(inpId, errId, show) {
+  document.getElementById(inpId)?.classList.toggle('err', show);
+  const e = document.getElementById(errId);
+  if (e) e.classList.toggle('show', show);
+}
+
+/* ── Validation ── */
+function validate(step) {
+  if (step === 1) {
+    const name  = document.getElementById('inp-name').value.trim();
+    const email = document.getElementById('inp-email').value.trim();
+    const nOk   = name.length > 0;
+    const eOk   = EMAIL_RE.test(email);
+    fieldErr('inp-name',  'err-name',  !nOk);
+    fieldErr('inp-email', 'err-email', !eOk);
+    return nOk && eOk;
+  }
+  if (step === 2) {
+    if (!selPos) { toast('Please select a position before continuing.', true); return false; }
+    const p = selPos.toUpperCase();
+    if (p === 'CEO' || p === 'CFO') { toast('That position is reserved. Please choose another role.', true); return false; }
+    if (p === 'CTO') {
+      const first = document.getElementById('inp-name').value.trim().split(/\s+/)[0].toLowerCase();
+      if (first !== 'jiya') { toast('The CTO position is exclusively for applicants named Jiya.', true); return false; }
+    }
+    return true;
+  }
+  if (step === 3) {
+    const why = document.getElementById('inp-whyReliv').value.trim();
+    fieldErr('inp-whyReliv', 'err-why', !why);
+    return why.length > 0;
+  }
+  return true;
+}
+
+/* ── Position select ── */
+function selectPos(btn) {
+  const pos = btn.dataset.pos;
+  if (btn.classList.contains('reserved')) {
+    document.getElementById('n-reserved').classList.add('show');
+    document.getElementById('n-jiya').classList.remove('show');
+    return;
+  }
+  document.getElementById('n-reserved').classList.remove('show');
+  document.getElementById('n-jiya').classList.toggle('show', pos === 'CTO');
+  document.querySelectorAll('#pos-grid .opt-btn:not(.reserved)').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const wrap = document.getElementById('other-pos-wrap');
+  const inp  = document.getElementById('inp-other-pos');
+  if (pos === 'Other') {
+    wrap.style.display = 'block';
+    selPos = inp.value.trim() || 'Other';
+    inp.oninput = inp.onblur = () => { selPos = inp.value.trim() || 'Other'; };
+    inp.focus();
+  } else {
+    wrap.style.display = 'none';
+    selPos = pos;
+  }
+}
+
+/* ── Domain toggle ── */
+function toggleDom(chip, dom) {
+  chip.classList.toggle('selected');
+  const on = chip.classList.contains('selected');
+  document.getElementById('dom-' + dom)?.classList.toggle('show', on);
+  on ? domains.add(dom) : domains.delete(dom);
+}
+
+/* ── YN pick ── */
+function pickYN(btn, key) {
+  btn.closest('.yn-row').querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  yn[key] = btn.textContent.trim();
+}
+
+/* ── Single-select ── */
+function pickSingle(btn, key) {
+  btn.closest('.opt-grid')?.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  singles[key] = btn.textContent.trim();
+}
+
+/* ── File handling ── */
+const ALLOWED_EXT  = /\.(pdf|doc|docx)$/i;
+const ALLOWED_MIME = new Set(['application/pdf','application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document']);
+
+function handleFile(input) {
+  const f = input.files[0];
+  if (!f) return;
+  if (!ALLOWED_MIME.has(f.type) && !ALLOWED_EXT.test(f.name)) {
+    toast('Only PDF, DOC, or DOCX files are accepted.', true);
+    input.value = ''; return;
+  }
+  if (f.size > 10 * 1024 * 1024) {
+    toast('File too large — maximum size is 10 MB.', true);
+    input.value = ''; return;
+  }
+  cvFile = f;
+  const tag = document.getElementById('file-tag');
+  tag.textContent = '✅ ' + f.name;
+  tag.style.display = 'block';
+}
+
+/* Drag & drop */
+(function () {
+  const zone = document.getElementById('file-drop');
+  zone.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') document.getElementById('cv-input').click(); });
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    const f = e.dataTransfer.files[0];
+    if (!f) return;
+    const dt = new DataTransfer(); dt.items.add(f);
+    const inp = document.getElementById('cv-input'); inp.files = dt.files;
+    handleFile(inp);
+  });
+})();
+
+/* ── Submit with retry + timeout ── */
+async function timedFetch(url, opts, ms = 25000) {
+  const ctrl  = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...opts, signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function submitForm() {
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>Submitting…';
+
+  /* Build FormData */
+  const g = id => (document.getElementById(id)?.value ?? '').trim();
+  const fd = new FormData();
+
+  fd.append('name',         g('inp-name'));
+  fd.append('email',        g('inp-email'));
+  fd.append('phone',        g('inp-phone'));
+  fd.append('city',         g('inp-city'));
+  fd.append('age',          g('inp-age'));
+  fd.append('gender',       g('inp-gender'));
+  fd.append('linkedin',     g('inp-linkedin'));
+  fd.append('portfolio',    g('inp-portfolio'));
+  fd.append('position',     selPos);
+  fd.append('salary',       g('inp-salary'));
+  fd.append('availability', g('inp-availability'));
+  fd.append('experience',   g('inp-experience'));
+  fd.append('education',    g('inp-education'));
+  fd.append('currentRole',  g('inp-currentRole'));
+  fd.append('workMode',     singles['workMode'] || '');
+  fd.append('whyReliv',     g('inp-whyReliv'));
+  fd.append('strategy',     g('inp-strategy'));
+  fd.append('messageToTeam',g('inp-messageToTeam'));
+  fd.append('comments',     g('inp-comments'));
+  fd.append('referral',     g('inp-referral'));
+  fd.append('timeCommit',   yn['timeCommit']   || '');
+  fd.append('equity',       yn['equity']       || '');
+  fd.append('voiceover',    yn['voiceover']    || '');
+  fd.append('reels',        yn['reels']        || '');
+  fd.append('story',        yn['story']        || '');
+  fd.append('socialManage', yn['socialManage'] || '');
+  fd.append('domainCategory', [...domains].join(', '));
+  fd.append('marketingBrands',  g('inp-marketingBrands'));
+  fd.append('campaigns',        g('inp-campaigns'));
+  fd.append('instagram',        g('inp-instagram'));
+  fd.append('otherSocial',      g('inp-otherSocial'));
+  fd.append('mlProjectLink',    g('inp-mlLink'));
+  fd.append('uiuxLink',         g('inp-uiuxLink'));
+  fd.append('webdevLink',       g('inp-webdevLink'));
+  fd.append('electronicsVideo', g('inp-electronicsVideo'));
+  fd.append('financeTools',     g('inp-financeTools'));
+
+  const noteKeys = ['ops','sales','data','healthcare','legal','other'];
+  const notes = noteKeys.map(k => {
+    const v = g('inp-notes-' + k);
+    return v ? `[${k.toUpperCase()}] ${v}` : '';
+  }).filter(Boolean).join('\n\n');
+  fd.append('domainNotes', notes);
+
+  if (cvFile) fd.append('cv', cvFile, cvFile.name);
+
+  /* Retry loop */
+  const MAX_ATTEMPTS = 3;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res  = await timedFetch('/submit', { method: 'POST', body: fd });
+      const text = await res.text();
+      let data;
+      try { data = JSON.parse(text); }
+      catch { data = { ok: false, error: 'Unexpected server response. Please try again.' }; }
+
+      if (data.ok) {
+        /* ✅ Success */
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step-ty').classList.add('active');
+        document.getElementById('progress-outer').style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      if (data.reserved) {
+        /* Position blocked — don't retry */
+        toast(data.error, true);
+        btn.disabled = false;
+        btn.textContent = '🚀 Submit Application';
+        return;
+      }
+
+      /* Server error — retry if attempts remain */
+      if (attempt < MAX_ATTEMPTS) {
+        toast(`Something went wrong. Retrying… (${attempt}/${MAX_ATTEMPTS})`, false);
+        await new Promise(r => setTimeout(r, 1500 * attempt));
+        continue;
+      }
+
+      toast('Submission failed: ' + (data.error || 'Please try again.'), true);
+
+    } catch (err) {
+      const msg = err.name === 'AbortError' ? 'Request timed out.' : 'Network error.';
+      if (attempt < MAX_ATTEMPTS) {
+        toast(`${msg} Retrying… (${attempt}/${MAX_ATTEMPTS})`, false);
+        await new Promise(r => setTimeout(r, 1500 * attempt));
+        continue;
+      }
+      toast(`${msg} Please check your connection and try again.`, true);
+    }
+
+    btn.disabled = false;
+    btn.textContent = '🚀 Submit Application';
+    return;
+  }
+}
+
+/* ── Init ── */
+setProgress(1);
+</script>
+</body>
+</html>
