@@ -153,9 +153,8 @@ function buildEmail(d, hasCV, cvName) {
       ${row('LinkedIn',          safeLink(d.linkedin))}
       ${row('Portfolio',         safeLink(d.portfolio))}
 
-      ${section('🏢', 'Position & Compensation')}
+      ${section('🏢', 'Position Details')}
       ${row('Applied Position',  esc(d.position))}
-      ${row('Salary Expectation', esc(d.salary))}
 
       ${section('📋', 'Mission & Vision')}
       ${row('Why Reliv?',        esc(d.whyReliv))}

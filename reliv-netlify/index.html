@@ -287,36 +287,22 @@
         <button class="opt-btn"          data-pos="Head of Marketing"  onclick="selectPos(this)">Head of Marketing</button>
         <button class="opt-btn"          data-pos="Head of Design"     onclick="selectPos(this)">Head of Design</button>
         <button class="opt-btn"          data-pos="Head of Operations" onclick="selectPos(this)">Head of Operations</button>
+        <button class="opt-btn"          data-pos="Finance / Accounting" onclick="selectPos(this)">💰 Finance / Accounting</button>
         <button class="opt-btn"          data-pos="Other"              onclick="selectPos(this)">Other / Propose ✏️</button>
       </div>
 
-      <div class="notice notice-red" id="n-reserved">
-        <span class="n-icon">🔒</span>
-        <div class="n-text"><strong>This position is reserved.</strong> CEO and CFO are not open for external applications right now. Please choose another role.</div>
-      </div>
       <div class="notice notice-yellow" id="n-jiya">
         <span class="n-icon">⭐</span>
         <div class="n-text"><strong>CTO is exclusively for applicants named Jiya.</strong> If your first name is Jiya, you're very welcome to apply!</div>
+      </div>
+      <div class="notice notice-yellow" id="n-finance">
+        <span class="n-icon">💰</span>
+        <div class="n-text"><strong>Note:</strong> Selecting Finance/Accounting means your expertise is in accounting, financial modeling, or accounting tools — not salary negotiation.</div>
       </div>
       <div id="other-pos-wrap" style="display:none;margin-top:14px;">
         <label class="field-label" for="inp-other-pos">Describe the role you have in mind</label>
         <input class="form-input" id="inp-other-pos" type="text" placeholder="e.g. Head of Healthcare Partnerships">
       </div>
-    </div>
-
-    <div class="card">
-      <label class="field-label">Expected Salary Range (Monthly) <span class="opt-tag">(optional)</span></label>
-      <div class="opt-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));">
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹20–40K</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹40–60K</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹60–80K</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹80–120K</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹120–200K</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">₹200K+</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">Open to discussion</button>
-        <button class="opt-btn" onclick="pickSingle(this,'salary')">Equity based</button>
-      </div>
-      <p class="salary-hint">💡 Early-stage startup — equity &amp; non-cash comp available!</p>
     </div>
 
     <button class="btn-primary" onclick="nextStep(2)">Continue →</button>
@@ -644,12 +630,14 @@ function validate(step) {
 function selectPos(btn) {
   const pos = btn.dataset.pos;
   if (btn.classList.contains('reserved')) {
-    document.getElementById('n-reserved').classList.add('show');
-    document.getElementById('n-jiya').classList.remove('show');
+    document.getElementById('n-reserved')?.classList.remove('show');
+    document.getElementById('n-jiya')?.classList.remove('show');
+    document.getElementById('n-finance')?.classList.remove('show');
     return;
   }
-  document.getElementById('n-reserved').classList.remove('show');
-  document.getElementById('n-jiya').classList.toggle('show', pos === 'CTO');
+  document.getElementById('n-reserved')?.classList.remove('show');
+  document.getElementById('n-jiya')?.classList.toggle('show', pos === 'CTO');
+  document.getElementById('n-finance')?.classList.toggle('show', pos === 'Finance / Accounting');
   document.querySelectorAll('#pos-grid .opt-btn:not(.reserved)').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   const wrap = document.getElementById('other-pos-wrap');
@@ -754,7 +742,6 @@ async function submitForm() {
   fd.append('linkedin',     g('inp-linkedin'));
   fd.append('portfolio',    g('inp-portfolio'));
   fd.append('position',     selPos);
-  fd.append('salary',       singles['salary'] || '');
   fd.append('whyReliv',     g('inp-whyReliv'));
   fd.append('strategy',     g('inp-strategy'));
   fd.append('messageToTeam',g('inp-messageToTeam'));
